@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICE - LCC Student Chapter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.9);
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 900;
+            color: #4a2c82;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a2c82;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #f39c12;
+            border-bottom: 2px solid #f39c12;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 80vh;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .content-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            border-top: 5px solid #f39c12;
+        }
+
+        .hero-text {
+            font-size: 1.5rem;
+            color: #4a2c82;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .sub-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #4a2c82;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #f39c12;
+        }
+
+        .qr-card {
+            background: white;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #f39c12;
+            box-shadow: 0 0 10px #f39c12;
+            top: 0;
+            animation: scan 2s infinite linear;
+            display: none;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+
+        .qr-instruction {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .member-profile {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+            border-left: 5px solid #4a2c82;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: #4a2c82;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+
+        .member-info h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .status-badge {
+            background: #27ae60;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .nav-links { font-size: 0.9rem; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-container"></div>
+
+    <nav>
+        <div class="logo">PICE - LCC SC</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+            <li><a href="#" onclick="showPage('events')" id="nav-events">Events & Updates</a></li>
+            <li><a href="#" onclick="showPage('membership')" id="nav-membership">Membership</a></li>
+            <li><a href="#" onclick="showPage('faculty')" id="nav-faculty">Faculty & Members</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <section id="home" class="page-section active">
+            <h1>Philippine Institute of Civil Engineers</h1>
+            <div class="content-card">
+                <p class="hero-text">LCC Student Chapter</p>
+                <p class="sub-text">
+                    Welcome to the official portal. We are dedicated to the advancement of civil engineering students through academic excellence, service, and fellowship.
+                </p>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="color: #4a2c82; margin-bottom: 15px;">Member Verification</h3>
+                    <p style="margin-bottom: 15px; font-size: 0.9rem;">Scan your ID QR Code to view your membership status.</p>
+                    
+                    <div class="qr-card">
+                        <div class="qr-placeholder" id="qr-target">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PICE-LCC-MEMBER" alt="QR Code" style="width: 150px; height: 150px;">
+                            <div class="scanner-line" id="scan-line"></div>
+                        </div>
+                        <button class="btn" onclick="simulateScan()">Simulate Scan</button>
+                        <p class="qr-instruction">Point your camera at the ID card</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="page-section">
+            <h1>Events & Updates</h1>
+            <div class="content-card">
+                <h3 style="color: #f39c12;">Upcoming: General Assembly</h3>
+                <p class="sub-text">Date: November 15, 2023<br>Location: LCC Auditorium</p>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                <h3 style="color: #f39c12;">Recent: CE Week 2023</h3>
+                <p class="sub-text">Thank you to all volunteers and participants!</p>
+            </div>
+        </section>
+
+        <section id="membership" class="page-section">
+            <h1>Membership Portal</h1>
+            <div class="content-card">
+                <div id="login-prompt">
+                    <p class="sub-text">Please scan your QR code at the Home page to access your records.</p>
+                </div>
+
+                <div id="member-data" style="display: none;">
+                    <h2 style="color: #4a2c82; text-shadow: none;">Member Information</h2>
+                    <div class="member-profile">
+                        <div class="member-avatar">JD</div>
+                        <div class="member-info">
+                            <h3>Juan Dela Cruz</h3>
+                            <p>ID: 2023-CE-001</p>
+                            <p>Year Level: 3rd Year</p>
+                            <br>
+                            <span class="status-badge">Status: Active Member</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; text-align: left;">
+                        <p><strong>Email:</strong> juan.delacruz@lcc.edu.ph</p>
+                        <p><strong>Officer Role:</strong> None</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faculty" class="page-section">
+            <h1>Faculty & Members</h1>
+            <div class="content-card">
+                <h3>Engr. Maria Santos</h3>
+                <p class="sub-text">Faculty Adviser</p>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+                <h3>Engr. Ricardo Reyes</h3>
+                <p class="sub-text">Department Head</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active');
+        }
+
+        function simulateScan() {
+            const scanLine = document.getElementById('scan-line');
+            
+            scanLine.style.display = 'block';
+            
+            setTimeout(() => {
+                scanLine.style.display = 'none';
+                
+                showPage('membership');
+                
+                document.getElementById('login-prompt').style.display = 'none';
+                document.getElementById('member-data').style.display = 'block';
+
+                setTimeout(() => {
+                }, 10000);
+
+            }, 1500);
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const studentId = urlParams.get('id');
+
+            if (studentId) {
+                showPage('membership');
+                loadMemberData(studentId);
+            }
+        };
+
+        function loadMemberData(id) {
+            document.getElementById('login-prompt').style.display = 'none';
+            document.getElementById('member-data').style.display = 'block';
+            
+            document.querySelector('.member-info h3').innerText = "Student ID: " + id;
+            document.querySelector('.member-info p:nth-of-type(1)').innerText = "Status: Verified";
+        }
+    </script>
+
+</body>
+</html>
