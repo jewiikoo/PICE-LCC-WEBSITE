@@ -246,8 +246,8 @@ closeM.onclick=()=>modal.classList.remove("open");
 modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")modal.classList.remove("open")});
 /* ===== Membership sync: Google Form -> Google Sheet -> this website ===== */
-const SHEET_CSV_URL="";  /* paste the Google Sheet "Publish to web" CSV link here */
-const FORM_URL="";       /* optional: paste your Google Form link to show a "Fill out the form" button */
+const SHEET_CSV_URL="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv";
+const FORM_URL="";       
 const $=id=>document.getElementById(id);
 //<pure>
 const nk=s=>String(s==null?"":s).replace(/[^a-z0-9]/gi,"").toUpperCase();
