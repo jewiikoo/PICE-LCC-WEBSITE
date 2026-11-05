@@ -247,7 +247,6 @@ modal.onclick=e=>{if(e.target===modal)modal.classList.remove("open")};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")modal.classList.remove("open")});
 /* ===== Membership sync: Google Form -> Google Sheet -> this website ===== */
 const SHEET_CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRDu_vIR29FRf3dMIgaoQiFdfo0G-IqzSmJ_9yY5Aknk_-VScAS7J98nNtPa-2bDLFKG7AC0MLhv5fr/pub?gid=238611629&single=true&output=csv";
-const FORM_URL="";       
 const $=id=>document.getElementById(id);
 //<pure>
 const nk=s=>String(s==null?"":s).replace(/[^a-z0-9]/gi,"").toUpperCase();
